@@ -3,7 +3,7 @@ const fs = require('fs');
 const DATA_FILE = "data/entralink.json";
 const ENTRALINK_NAME = "Entralink";
 const ENTRALINK = client.guilds.find(val => val.name === ENTRALINK_NAME);
-const STAFF_ROLES = ["Room Owner", "Operator", "Half-Operator"];
+const STAFF_ROLES = ["Server Owner", "Server Owner", "Operator", "Half-Operator"];
 const AC_ROLE = ENTRALINK.roles.findKey("name", "Autoconfirmed");
 
 if (!ENTRALINK) console.log("[ERROR] Entralink guild not found. Entralink specific commands will not work.");
