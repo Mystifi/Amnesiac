@@ -33,7 +33,7 @@ async function parse(msg) {
         const cmd = msg.content.split(' ')[0].slice(config.commandToken.length);
         if (commands.has(cmd)) {
             commands.get(cmd).call({parseIds: parseIds, nameFromId: nameFromId}, msg.channel, msg.author, msg.content.split(' ').slice(1).join(' '));
-        } else {
+        } else if (msg.channel.type === 'dm') {
             msg.channel.send(`Unknown command: ${cmd}`);
         }
     }
