@@ -29,7 +29,7 @@ exports.commands = {
         if (!isStaff(user)) return channel.send("This command can only be used by staff.");
 
         let [id, psName] = message.split(',').map(param => param.trim());
-        if (!id || !message) return channel.send("Invalid parameters. Syntax: ``/autoconfirm @user, ps username``");
+        if (!id || !psName) return channel.send("Invalid parameters. Syntax: ``/autoconfirm @user, ps username``");
         id = id.replace(/[^0-9]/g, '');
         let guildMember = ENTRALINK.members.get(id);
         if (!guildMember) return channel.send("Invalid User.");
