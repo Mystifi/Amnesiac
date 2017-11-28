@@ -1,0 +1,1 @@
+This directory stores all data files used by the bot. NB: This directory is required, and running the bot without it won't work.
