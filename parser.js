@@ -2,6 +2,7 @@ const fs = require('fs');
 const config = require('./config.json');
 
 const commands = new Map();
+const chatParsers = [];
 
 console.log("[STATUS] Loading commands");
 
@@ -12,6 +13,10 @@ fs.readdirSync('./plugins')
     if (plugin.commands) {
         for (let cmd in plugin.commands) {
             commands.set(cmd, plugin.commands[cmd]);
+        }
+    } else if (plugin.parsers) {
+        if (plugin.parsers.chat) {
+            chatParsers.push(plugin.parsers.chat);
         }
     }
 });
@@ -35,6 +40,10 @@ async function parse(msg) {
             commands.get(cmd).call({parseIds: parseIds, nameFromId: nameFromId}, msg.channel, msg.author, msg.content.split(' ').slice(1).join(' '));
         } else if (msg.channel.type === 'dm') {
             msg.channel.send(`Unknown command: ${cmd}`);
+        }
+    } else if (msg.channel.type === 'text') {
+        for (let parser of chatParsers) {
+            parser.call({parseIds: parseIds, nameFromId: nameFromId}, msg.channel, msg.author, msg.content, msg);
         }
     }
 }
