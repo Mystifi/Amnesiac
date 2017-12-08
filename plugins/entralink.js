@@ -10,9 +10,9 @@ const AC_ROLE = ENTRALINK.roles.findKey("name", "Autoconfirmed");
 if (!ENTRALINK) console.log("[ERROR] Entralink guild not found. Entralink specific commands will not work.");
 
 function isStaff(user) {
-    let guildMember = ENTRALINK.members.get(user.id);
-    if (!guildMember) return false;
-    return !!guildMember.roles.find(val => STAFF_ROLES.includes(val.name));
+	let guildMember = ENTRALINK.members.get(user.id);
+	if (!guildMember) return false;
+	return !!guildMember.roles.find(val => STAFF_ROLES.includes(val.name));
 }
 
 let data = {};
@@ -25,45 +25,45 @@ if (!data || typeof data !== 'object') data = {};
 
 
 exports.commands = {
-    autoconfirm: function (channel, user, message) {
-        if (!ENTRALINK.channels.has(channel.id)) return channel.send("This command can only be used in the Entralink.");
-        if (!isStaff(user)) return channel.send("This command can only be used by staff.");
+	autoconfirm: function (channel, user, message) {
+		if (!ENTRALINK.channels.has(channel.id)) return channel.send("This command can only be used in the Entralink.");
+		if (!isStaff(user)) return channel.send("This command can only be used by staff.");
 
-        let [id, psName] = message.split(',').map(param => param.trim());
-        if (!id || !psName) return channel.send("Invalid parameters. Syntax: ``/autoconfirm @user, ps username``");
-        id = id.replace(/[^0-9]/g, '');
-        let guildMember = ENTRALINK.members.get(id);
-        if (!guildMember) return channel.send("Invalid User.");
+		let [id, psName] = message.split(',').map(param => param.trim());
+		if (!id || !psName) return channel.send("Invalid parameters. Syntax: ``/autoconfirm @user, ps username``");
+		id = id.replace(/[^0-9]/g, '');
+		let guildMember = ENTRALINK.members.get(id);
+		if (!guildMember) return channel.send("Invalid User.");
 
-        data[id] = psName;
-        fs.writeFile(DATA_FILE, JSON.stringify(data), () => {});
+		data[id] = psName;
+		fs.writeFile(DATA_FILE, JSON.stringify(data), () => {});
 
-        guildMember.addRole(AC_ROLE, `Autoconfirmed as ${psName}`);
+		guildMember.addRole(AC_ROLE, `Autoconfirmed as ${psName}`);
 
-        channel.send(`${this.nameFromId(id)} is now autoconfirmed as ${psName}.`);
-    },
-    whois: function (channel, user, message) {
-        if (!ENTRALINK.channels.has(channel.id)) return channel.send("This command can only be used in the Entralink.");
+		channel.send(`${this.nameFromId(id)} is now autoconfirmed as ${psName}.`);
+	},
+	whois: function (channel, user, message) {
+		if (!ENTRALINK.channels.has(channel.id)) return channel.send("This command can only be used in the Entralink.");
 
-        let id = message.replace(/[^0-9]/g, '');
-        if (!id) return channel.send("Invalid user. Syntax: ``/whois @user``");
+		let id = message.replace(/[^0-9]/g, '');
+		if (!id) return channel.send("Invalid user. Syntax: ``/whois @user``");
 
-        if (!data[id]) return channel.send("This user isn't autoconfirmed.");
-        return channel.send(`${this.nameFromId(id)} is autoconfirmed as ${data[id]}.`);
-    },
+		if (!data[id]) return channel.send("This user isn't autoconfirmed.");
+		return channel.send(`${this.nameFromId(id)} is autoconfirmed as ${data[id]}.`);
+	},
 };
 
 exports.parsers = {
-    chat: function (channel, user, message, msgObj) {
-        if (!ENTRALINK.channels.has(channel.id)) return; // Only use this in entralink
-        let guildMember = ENTRALINK.members.get(user.id);
-        if (!guildMember) return; // failsafe
-        
-        if (guildMember.roles.has(AC_ROLE.id)) return; // Only apply to non-AC users.
+	chat: function (channel, user, message, msgObj) {
+		if (!ENTRALINK.channels.has(channel.id)) return; // Only use this in entralink
+		let guildMember = ENTRALINK.members.get(user.id);
+		if (!guildMember) return; // failsafe
 
-        if (message.match(TRADE_REGEX)) {
-            msgObj.delete();
-            user.send(`Hi. This is an automated response to the message (${message}) you just posted in Entralink. Your message was automatically recognized as a trade post. Trading is not allowed in the Entralink Discord. Use the Wi-Fi room on Pokémon Showdown if you wish to trade. Please read the #rules channel before posting. If your message was incorrectly flagged, message an Operator.`);
-        }
-    },
+		if (guildMember.roles.has(AC_ROLE.id)) return; // Only apply to non-AC users.
+
+		if (message.match(TRADE_REGEX)) {
+			msgObj.delete();
+			user.send(`Hi. This is an automated response to the message (${message}) you just posted in Entralink. Your message was automatically recognized as a trade post. Trading is not allowed in the Entralink Discord. Use the Wi-Fi room on Pokémon Showdown if you wish to trade. Please read the #rules channel before posting. If your message was incorrectly flagged, message an Operator.`);
+		}
+	},
 };
