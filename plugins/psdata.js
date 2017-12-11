@@ -6,7 +6,9 @@ exports.commands = {
 			if (results.reply) {
 				return channel.send(results.reply);
 			} else if (results.data) {
-				return channel.send(`ds ${message}: **${results.data.map(template => template.name).join(', ')}**`);
+				let displayed = results.data;
+				if (channel.type === 'text') displayed = displayed.slice(0, 20);
+				return channel.send(`ds ${message}: **${results.data.map(template => template.name).join(', ')}**${displayed.length !== results.data.length ? ` and ${results.data.length - displayed.length} more. Use this command in PM to see all results.` : ""}`);
 			}
 		}, () => channel.send("Something went wrong running the dexsearch query. Please PM the bot's owner and tell them what you entered."));
 	},
@@ -15,8 +17,9 @@ exports.commands = {
 			if (results.reply) {
 				return channel.send(results.reply);
 			} else if (results.data) {
-				return channel.send(`randpoke${message ? ` ${message}` : ''}: **${results.data.map(template => template.name).join(', ')}**`);
-			}
+				let displayed = results.data;
+				if (channel.type === 'text') displayed = displayed.slice(0, 20);
+				return channel.send(`randpoke ${message}: **${results.data.map(template => template.name).join(', ')}**${displayed.length !== results.data.length ? ` and ${results.data.length - displayed.length} more. Use this command in PM to see all results.` : ""}`);			}
 		}, () => channel.send("Something went wrong running the dexsearch query. Please PM the bot's owner and tell them what you entered."));
 	},
 	movesearch: function (channel, user, message) {
@@ -24,8 +27,9 @@ exports.commands = {
 			if (results.reply) {
 				return channel.send(results.reply);
 			} else if (results.data) {
-				return channel.send(`movesearch ${message}: **${results.data.map(template => template.name).join(', ')}**`);
-			}
+				let displayed = results.data;
+				if (channel.type === 'text') displayed = displayed.slice(0, 20);
+				return channel.send(`movesearch ${message}: **${results.data.map(template => template.name).join(', ')}**${displayed.length !== results.data.length ? ` and ${results.data.length - displayed.length} more. Use this command in PM to see all results.` : ""}`);			}
 		}, () => channel.send("Something went wrong running the dexsearch query. Please PM the bot's owner and tell them what you entered."));
 	},
 	itemsearch: function (channel, user, message) {
@@ -33,8 +37,9 @@ exports.commands = {
 			if (results.reply) {
 				return channel.send(results.reply);
 			} else if (results.data) {
-				return channel.send(`itemsearch ${message}: **${results.data.map(template => template.name).join(', ')}**`);
-			}
+				let displayed = results.data;
+				if (channel.type === 'text') displayed = displayed.slice(0, 20);
+				return channel.send(`itemsearch ${message}: **${results.data.map(template => template.name).join(', ')}**${displayed.length !== results.data.length ? ` and ${results.data.length - displayed.length} more. Use this command in PM to see all results.` : ""}`);			}
 		}, () => channel.send("Something went wrong running the dexsearch query. Please PM the bot's owner and tell them what you entered."));
 	},
 };
