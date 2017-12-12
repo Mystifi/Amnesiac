@@ -8,7 +8,7 @@ exports.commands = {
 			} else if (results.data) {
 				let displayed = results.data;
 				if (channel.type === 'text') displayed = displayed.slice(0, 20);
-				return channel.send(`ds ${message}: **${results.data.map(template => template.name).join(', ')}**${displayed.length !== results.data.length ? ` and ${results.data.length - displayed.length} more. Use this command in PM to see all results.` : ""}`);
+				return channel.send(`ds ${message}: **${displayed.map(template => template.name).join(', ')}**${displayed.length !== results.data.length ? ` and ${results.data.length - displayed.length} more. Use this command in PM to see all results.` : ""}`);
 			}
 		}, () => channel.send("Something went wrong running the dexsearch query. Please PM the bot's owner and tell them what you entered."));
 	},
@@ -19,7 +19,7 @@ exports.commands = {
 			} else if (results.data) {
 				let displayed = results.data;
 				if (channel.type === 'text') displayed = displayed.slice(0, 20);
-				return channel.send(`randpoke ${message}: **${results.data.map(template => template.name).join(', ')}**${displayed.length !== results.data.length ? ` and ${results.data.length - displayed.length} more. Use this command in PM to see all results.` : ""}`);			
+				return channel.send(`randpoke ${message}: **${displayed.map(template => template.name).join(', ')}**${displayed.length !== results.data.length ? ` and ${results.data.length - displayed.length} more. Use this command in PM to see all results.` : ""}`);			
 			}
 		}, () => channel.send("Something went wrong running the dexsearch query. Please PM the bot's owner and tell them what you entered."));
 	},
@@ -30,7 +30,7 @@ exports.commands = {
 			} else if (results.data) {
 				let displayed = results.data;
 				if (channel.type === 'text') displayed = displayed.slice(0, 20);
-				return channel.send(`movesearch ${message}: **${results.data.map(template => template.name).join(', ')}**${displayed.length !== results.data.length ? ` and ${results.data.length - displayed.length} more. Use this command in PM to see all results.` : ""}`);			
+				return channel.send(`movesearch ${message}: **${displayed.map(template => template.name).join(', ')}**${displayed.length !== results.data.length ? ` and ${results.data.length - displayed.length} more. Use this command in PM to see all results.` : ""}`);			
 			}
 		}, () => channel.send("Something went wrong running the dexsearch query. Please PM the bot's owner and tell them what you entered."));
 	},
