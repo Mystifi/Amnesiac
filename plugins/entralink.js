@@ -2,10 +2,11 @@ const fs = require('fs');
 
 const DATA_FILE = "data/entralink.json";
 const ENTRALINK_NAME = "Entralink";
-const TRADE_REGEX = /\blf\b|\bft\b|\bfor trade\b|\blooking for\b|\btrading\b|\btrade for\b/ig;
+const TRADE_REGEX = /\blf\b|\bft\b|\b(for|to) trade\b|\blooking for\b|\btrading\b|\btrade for\b/ig;
 const ENTRALINK = client.guilds.find(val => val.name === ENTRALINK_NAME);
 const STAFF_ROLES = ["Server Owner", "Server Owner", "Operator", "Half-Operator"];
 const AC_ROLE = ENTRALINK.roles.findKey("name", "Autoconfirmed");
+const STAFF_ANNOUNCEMENTS_CHAN = ENTRALINK.channels.find("name", "staff-announcements");
 
 if (!ENTRALINK) console.log("[ERROR] Entralink guild not found. Entralink specific commands will not work.");
 
@@ -63,6 +64,7 @@ exports.parsers = {
 
 		if (message.match(TRADE_REGEX)) {
 			msgObj.delete();
+			STAFF_ANNOUNCEMENTS_CHAN.send(`Deleted a trade request from ${user.username} in ${channel.name}: ${message}`);
 			user.send(`Hi. This is an automated response to the message (${message}) you just posted in Entralink. Your message was automatically recognized as a trade post. Trading is not allowed in the Entralink Discord. Use the Wi-Fi room on Pokémon Showdown if you wish to trade. Please read the #rules channel before posting. If your message was incorrectly flagged, message an Operator.`);
 		}
 	},
