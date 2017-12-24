@@ -14,7 +14,8 @@ fs.readdirSync('./plugins')
 			for (let cmd in plugin.commands) {
 				commands.set(cmd, plugin.commands[cmd]);
 			}
-		} else if (plugin.parsers) {
+		}
+		if (plugin.parsers) {
 			if (plugin.parsers.chat) {
 				chatParsers.push(plugin.parsers.chat);
 			}
