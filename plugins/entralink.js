@@ -60,7 +60,7 @@ exports.parsers = {
 		let guildMember = ENTRALINK.members.get(user.id);
 		if (!guildMember) return; // failsafe
 
-		if (guildMember.roles.has(AC_ROLE.id)) return; // Only apply to non-AC users.
+		if (guildMember.roles.has(AC_ROLE)) return; // Only apply to non-AC users.
 
 		if (message.match(TRADE_REGEX)) {
 			msgObj.delete();
