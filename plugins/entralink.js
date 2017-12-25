@@ -63,6 +63,7 @@ exports.parsers = {
 		if (guildMember.roles.has(AC_ROLE)) return; // Only apply to non-AC users.
 
 		if (message.match(TRADE_REGEX)) {
+			if (message.toLowerCase().includes('help') && message.toLowerCase().includes('looking for')) return;
 			msgObj.delete();
 			STAFF_ANNOUNCEMENTS_CHAN.send(`Deleted a trade request from ${user.username} in ${channel.name}: ${message}`);
 			user.send(`Hi. This is an automated response to the message (${message}) you just posted in Entralink. Your message was automatically recognized as a trade post. Trading is not allowed in the Entralink Discord. Use the Wi-Fi room on Pokémon Showdown if you wish to trade. Please read the #rules channel before posting. If your message was incorrectly flagged, message an Operator.`);
