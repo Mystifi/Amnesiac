@@ -81,4 +81,7 @@ exports.commands = {
 			}
 		});
 	},
+	smogdex: function (channel, user, message) {
+		dex.smogdex(message).then(response => channel.send(response), () => channel.send("Something went wrong running the smogdex query. Please PM the bot's owner and tell them what you entered."));
+	},
 };
