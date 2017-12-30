@@ -64,7 +64,7 @@ exports.commands = {
 							`Effect: ${entry.shortDesc}. Requires ${entry.isZ}.` :
 							`Description: **_${entry.desc}_**. Base Power: **${entry.basePower}**. Accuracy: **${entry.accuracy === true ? '-' : entry.accuracy}**. PP: **${entry.pp}**. ` +
 							('contact' in entry.flags ? "Makes contact. " : '') +
-							(entry.zMovePower ? `Z-Power: ${entry.zMovePower}` : `Z-effect: ${entry.zMoveEffect}`) +
+							(entry.zMovePower ? `Z-Power: ${entry.zMovePower} ` : `Z-effect: ${entry.zMoveEffect} `) +
 							`Contest Type: ${entry.contestType}. Priority: ${entry.priority}.`
 						)
 					);
