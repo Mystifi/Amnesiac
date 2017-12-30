@@ -75,6 +75,11 @@ exports.commands = {
 						(entry.naturalGift ? `Natural Gift: ${entry.naturalGift.basePower}BP ${entry.naturalGift.type}. ` : '') +
 						(entry.fling ? `Fling BP: ${entry.fling.basePower}${entry.fling.status ? ` ${entry.fling.status}` : ''}${entry.fling.volatileStatus ? ` ${entry.fling.volatileStatus}` : ''}. ` : '')
 					);
+				} else if (entry.fullname.startsWith('ability')) {
+					channel.send(
+						`**${entry.name}**, an ability introduced in Generation ${entry.gen}. ` +
+						`Description: _${entry.desc}_ `
+					);
 				} else {
 					channel.send("Error: Unrecognized data type.");
 				}
