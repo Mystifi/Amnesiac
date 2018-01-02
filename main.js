@@ -3,10 +3,18 @@ const config = require('./config.json');
 
 global.client = new Discord.Client();
 
+global.print = function (message) {
+	if (process.send) {
+		process.send(`msg|${message}`);
+	} else {
+		console.log(message);
+	}
+};
+
 let parser;
 
 client.on('ready', () => {
-	console.log(`[STATUS] Logged in as ${client.user.tag}`);
+	print(`[STATUS] Logged in as ${client.user.tag}`);
 	parser = require('./parser.js');
 });
 
@@ -15,5 +23,5 @@ client.on('message', msg => {
 	parser.parse(msg);
 });
 
-console.log("[STATUS] Logging in...");
+print("[STATUS] Logging in...");
 client.login(config.token);

@@ -8,7 +8,7 @@ const STAFF_ROLES = ["Server Owner", "Server Owner", "Operator", "Half-Operator"
 const AC_ROLE = ENTRALINK.roles.findKey("name", "Autoconfirmed");
 const STAFF_ANNOUNCEMENTS_CHAN = ENTRALINK.channels.find("name", "staff-announcements");
 
-if (!ENTRALINK) console.log("[ERROR] Entralink guild not found. Entralink specific commands will not work.");
+if (!ENTRALINK) print("[ERROR] Entralink guild not found. Entralink specific commands will not work.");
 
 function isStaff(user) {
 	let guildMember = ENTRALINK.members.get(user.id);

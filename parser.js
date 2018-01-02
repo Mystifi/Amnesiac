@@ -4,7 +4,7 @@ const config = require('./config.json');
 const commands = new Map();
 const chatParsers = [];
 
-console.log("[STATUS] Loading commands");
+print("[STATUS] Loading commands");
 
 fs.readdirSync('./plugins')
 	.filter((file) => file.endsWith('.js'))
@@ -22,7 +22,7 @@ fs.readdirSync('./plugins')
 		}
 	});
 
-console.log("[STATUS] Setup done.");
+print("[STATUS] Setup done.");
 
 function nameFromId(id) {
 	const user = client.users.get(id);

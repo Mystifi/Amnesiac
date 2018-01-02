@@ -9,7 +9,7 @@
   },
   "bin": "./main.js",
   "scripts": {
-    "start": "node main.js"
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",

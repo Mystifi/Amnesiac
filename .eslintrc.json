@@ -4,7 +4,7 @@
 		"node": true
 	},
 	"globals": {
-		"client": false, "toId": false
+		"client": false, "toId": false, "print": false
 	},
 	"parserOptions": {
 		"ecmaVersion": 8,

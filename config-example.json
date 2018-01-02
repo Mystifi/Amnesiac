@@ -1,4 +1,5 @@
 {
     "token": "Your token goes here",
-    "commandToken": "/"
+    "commandToken": "/",
+    "admins": ["Id of the admins of the bot go here."]
 }
